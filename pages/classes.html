@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Class Manipulering Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    /* Skjuler elementer */
+    .hidden {
+      display: none;
+    }
+    /* Rød farge */
+    .red {
+      background-color: #ffcccc;
+      border: 1px solid #cc0000;
+      padding: 10px;
+    }
+    /* Blå farge */
+    .blue {
+      background-color: #cce5ff;
+      border: 1px solid #004085;
+      padding: 10px;
+    }
+    /* Ekstra styling */
+    .extra {
+      font-size: 1.5em;
+      border: 2px dashed #333;
+    }
+    .card {
+      border: 1px solid #ccc;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+    button {
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Class Manipulering Demo</h1>
+  
+  <!-- Seksjon 1: Skjul/Vis Element -->
+  <section>
+    <h2>Skjul/Vis Element</h2>
+    <div id="element1" class="card">
+      Dette elementet kan skjules eller vises ved å legge til/fjerne klassen <code>hidden</code>.
+    </div>
+    <!-- Kaller funksjonen toggleVisibility() direkte -->
+    <button onclick="toggleVisibility()">Toggle synlighet</button>
+  </section>
+  
+  <!-- Seksjon 2: Endre farge på element -->
+  <section>
+    <h2>Endre Farge på Element</h2>
+    <div id="element2" class="card">
+      Dette elementet kan endre farge når du legger til klassene <code>red</code> eller <code>blue</code>.
+    </div>
+    <!-- Kaller funksjoner direkte -->
+    <button onclick="toggleRed()">Toggle rød farge</button>
+    <button onclick="toggleBlue()">Toggle blå farge</button>
+  </section>
+  
+  <!-- Seksjon 3: Legg til og fjern ekstra klasse -->
+  <section>
+    <h2>Legg til og Fjern Ekstra Klasse</h2>
+    <div id="element3" class="card">
+      Dette elementet kan få en ekstra klasse for å endre utseendet, for eksempel for å øke skriftstørrelse eller endre ramme.
+    </div>
+    <!-- Kaller funksjoner direkte -->
+    <button onclick="addExtraClass()">Legg til ekstra class</button>
+    <button onclick="removeExtraClass()">Fjern ekstra class</button>
+  </section>
+  
+  <a href="/pages/comp.html">Neste side</a>
+  <!-- Inkluder JavaScript-filen -->
+  <script src="/scripts/classes.js"></script>
+</body>
+</html>
