@@ -8,6 +8,7 @@ function handleSubmit(event) {
     const formData = new FormData(event.target);
   
     // Hent verdier med navn-attributtene fra skjemaet
+    // Alternativt navn: document.getElementById('navn').value
     const person = {
       navn: formData.get('navn'),
       alder: formData.get('alder'),
@@ -46,7 +47,7 @@ function handleSubmit(event) {
           <p>
             <strong>Alder:</strong> ${person.alder}<br>
             <strong>E-post:</strong> ${person.epost}<br>
-            <strong>Nummer:</strong> ${person.nummer}
+            <strong>Telefonnummer:</strong> ${person.nummer}
           </p>
         </div>
       `;
