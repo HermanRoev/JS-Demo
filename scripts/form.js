@@ -30,7 +30,7 @@ function handleSubmit(event) {
   function oppdaterKort() {
     const container = document.getElementById('kortContainer');
     
-    // Bruker map() til å bygge en HTML-streng for hvert personkort
+    // Bruker map() til å bygge en HTML-streng for hvert personkort og en arrow function
     container.innerHTML = personer.map(person => {
       // Bestemmer hvilken bakgrunnsklasse som skal brukes, avhengig av valg (red/blue/none)
       let bgClass = "";
@@ -59,6 +59,7 @@ function handleSubmit(event) {
     const container = document.getElementById('kortContainer');
     container.innerHTML = ""; // Tøm eksisterende innhold
   
+    // Finnes ogsa 'for of' loop eller vanlig for loop
     personer.forEach(function(person) {
       const kort = document.createElement('div');
       kort.classList.add('card');

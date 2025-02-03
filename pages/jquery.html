@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+  <meta charset="UTF-8">
+  <title>Generer Personkort (jQuery-versjon)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    label {
+      display: inline-block;
+      width: 80px;
+    }
+    input {
+      margin-bottom: 10px;
+    }
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 15px;
+      margin-bottom: 10px;
+      box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .card h3 {
+      margin: 0 0 10px 0;
+    }
+    .red {
+      background-color: #ffcccc;
+    }
+    .blue {
+      background-color: #cce5ff;
+    }
+  </style>
+</head>
+<body>
+  <h1>Generer Personkort (jQuery)</h1>
+
+  <!-- Skjema uten onsubmit, vi håndterer det i jQuery-koden -->
+  <form id="personSkjema">
+    <div>
+      <label for="navn">Navn:</label>
+      <input type="text" id="navn" name="navn" required>
+    </div>
+    <div>
+      <label for="alder">Alder:</label>
+      <input type="number" id="alder" name="alder" required>
+    </div>
+    <div>
+      <label for="epost">E-post:</label>
+      <input type="email" id="epost" name="epost" required>
+    </div>
+    <div>
+      <label for="nummer">Nummer:</label>
+      <input type="number" id="nummer" name="nummer" required>
+    </div>
+    <fieldset>
+      <legend>Velg bakgrunnsfarge</legend>
+      <label>
+        <input type="radio" name="bgColor" value="red" required>
+        Rød
+      </label>
+      <label>
+        <input type="radio" name="bgColor" value="blue">
+        Blå
+      </label>
+      <label>
+        <input type="radio" name="bgColor" value="none">
+        Ingen
+      </label>
+    </fieldset>
+    <div>
+      <label for="font">Velg font:</label>
+      <select id="font" name="font" required>
+        <option value="Arial" selected>Arial</option>
+        <option value="'Times New Roman', Times, serif">Times New Roman</option>
+        <option value="'Courier New', Courier, monospace">Courier New</option>
+        <option value="Verdana">Verdana</option>
+      </select>
+    </div>
+    <button type="submit">Send inn</button>
+  </form>
+  
+  <hr>
+  
+  <h2>Personkort</h2>
+  <div id="kortContainer"></div>
+
+  <a href="/pages/classes.html">Neste side</a>
+
+  <!-- jQuery fra CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    // Array for å lagre person-objektene
+    let personer = [];
+
+    // Når dokumentet er klart ...
+    $(document).ready(() => {
+      // Håndterer skjemainnsending ved å lytte på 'submit' via jQuery
+      $('#personSkjema').on('submit', (event) => {
+        event.preventDefault(); // Forhindre at skjemaet sender data på den tradisjonelle måten
+
+        // Hent verdiene fra inputfeltene ved bruk av jQuery .val()
+        const person = {
+          navn:   $('#navn').val(),
+          alder:  $('#alder').val(),
+          epost:  $('#epost').val(),
+          nummer: $('#nummer').val(),
+          bgColor: $('input[name="bgColor"]:checked').val(),
+          font:    $('#font').val()
+        };
+
+        // Legg person-objektet i arrayen
+        personer.push(person);
+
+        // Oppdater kortene som vises
+        oppdaterKort();
+
+        // Nullstill skjemaet
+        $('#personSkjema')[0].reset();
+      });
+
+      // Funksjon for å oppdatere personkortene
+      const oppdaterKort = () => {
+        // Bygg opp HTML ved hjelp av .map()
+        const kortHtml = personer.map((person) => {
+          let bgClass = '';
+          if (person.bgColor === 'red')  bgClass = 'red';
+          if (person.bgColor === 'blue') bgClass = 'blue';
+          
+          return `
+            <div class="card ${bgClass}" style="font-family: ${person.font}">
+              <h3>${person.navn}</h3>
+              <p>
+                <strong>Alder:</strong> ${person.alder}<br>
+                <strong>E-post:</strong> ${person.epost}<br>
+                <strong>Nummer:</strong> ${person.nummer}
+              </p>
+            </div>
+          `;
+        }).join('');
+
+        // Sett inn den genererte HTML-en i #kortContainer
+        $('#kortContainer').html(kortHtml);
+      };
+    });
+  </script>
+</body>
+</html>
